@@ -3,61 +3,58 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int left();
-int right();
+void left();
+void right();
 
-int main(){
-    printf("p1\n");
-
+int main(void){
+    printf("p1 %d\n", getpid());
     pid_t pid = fork();
-    
-    // padre
-    if(pid != 0){
-        if(left() == 0)
-            printf("p7\n");
-        return 0;
+
+    if (pid == 0){
+        right();
+        exit(0);
+    }
+    else{
+        left();
     }
 
-    // figlio
-    else{
-        if(right() == 0)
-            printf("p8\n");  
-    }
-    printf("p9\n");
+    wait((int *) 0);
+    printf("p9 %d\n", getpid());
+
     return 0;
 }
 
-int left(){
-    printf("p2\n");
 
-    int pid = fork();
-    
+void left(){
+    printf("p2 %d\n", getpid());
 
-    // padre
-    if(pid != 0){
-        printf("p4\n");
+    pid_t pid = fork();
+
+    if(pid!= 0){
+        printf("p4 %d\n", getpid());
+        
+    }else{
+        printf("p5 %d\n", getpid());
+        exit(0);
     }
-    // figlio
-    if(pid == 0){
-        printf("p5\n");
-    }
 
-
-    return pid;
+    while (wait ((int *) 0) != pid);
+    printf("p7 %d\n", getpid());
 }
 
-int right(){
-    printf("p3\n");
-    int pid = fork();
 
-    // padre
-    if(pid != 0){}
+void right(){
+    printf("p3 %d\n", getpid());
 
-    // figlio
-    if(pid == 0){
-        printf("p6\n");
+    pid_t pid = fork();
+
+    if(pid!= 0){
+        
+    }else{
+        printf("p6 %d\n", getpid());
+        exit(0);
     }
 
-
-    return pid;
+    while (wait ((int *) 0) != pid);
+    printf("p8 %d\n", getpid());
 }
