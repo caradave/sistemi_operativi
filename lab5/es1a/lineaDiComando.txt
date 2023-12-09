@@ -1,0 +1,6 @@
+./a.out<input.txt  1>pari.txt 2>dispari.txt
+
+chiamo il mio eseguibile
+< gli inserisco dentro il mio file di inout dove ho i numeri che voglio dividere
+1>pari.txt metto il mio stdout su pari.txt
+2>dispari.txt mettoil mio stderr su dispari.txt
