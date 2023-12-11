@@ -1,4 +1,3 @@
-/*
 B.
 Utilizzare pipe e ridirezione su comandi di shell
 per effettuare le seguenti operazioni:
@@ -12,16 +11,8 @@ per effettuare le seguenti operazioni:
   ispezioni mediante il comando man, l'opzione -U del comando
   ps)
 
-*/
 
-// non ho capito che cosa dovrei fare in questo caso
-// che cosa volgiono da me con la programmazione concorrente in questo caso? 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-int main(void){
-
-  return 0;
-}
+> ls -laR /home/... | wc --lines
+> cat lab01.txt lab02.txt lab03.txt | wc --bytes
+> ps -aux | grep root | wc --lines

@@ -8,13 +8,13 @@ del vettore v di n elementi):
 
 for (i=0; i<n-1; i++) {
   for (j=0; j<n-1-i; j++) {
-    if (v[j] > v[j+1]) {
-       val = v[j];
-       v[j] = v[j+1];
-       v[j+1] = val;
-    }
+  if (v[j] > v[j+1]) {
+    val = v[j];
+    v[j] = v[j+1];
+    v[j+1] = val;
   }
 }
+
 
 Premessa numero 2.
 Un  file binario puo' essere scritto (funzione UNIX write)
@@ -55,15 +55,42 @@ Ognuno dei figli
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 int main(int argc, char *argv[]){
-    
-    if(argc != 2){
-        printf("passato il numero sbagliato di argomenti");
-        return -1;
-    }
-    
+  int array[12] = {12, 4, 5, 7, 4, 6, 9, 0, 33, 23, 5, 4};
+  int outf, inf;
+
+  if(argc != 2){
+    printf("passato il numero sbagliato di argomenti");
+      return -1;
+  }
+
+  if((outf = creat(argv[1], 0666) == -1)){
+    printf("impossibile aprire il file");
+    exit(-1);
+  }
+
+  printf("dati contenuti nel file: ");
+  for(int i=0; i<12; i++){
+    write(outf, &array[i], sizeof(int));
+    printf("%d ", array[i]);
+  }
+
+  close(outf);
 
 
-    return 0;
+  // sto aprendo un file con un intero con permesso solo di read
+  inf = open(argv[1], O_RDONLY);
+  if(inf == -1){
+    printf("impossibile aprire il file");
+    exit(-1);
+  }
+
+  printf("\nvettore pre ordinamento: ");
+  for(int i=0; i<12; i++){
+    
+  }
+
+  return 0;
 }
