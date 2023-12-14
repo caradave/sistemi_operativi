@@ -1,0 +1,43 @@
+- Scaricare dalla pagina web il file "lab01e03in.txt"
+- Nella stessa cartella in cui e' memorizzato il file creare:
+  - Una copia del file con nome "lab01e03in.copy"
+  - Un hard-link al file con nome "lab01e03in.hl"
+  - Un soft-link al file con nome "lab01e03in.sl"
+- Visualizzare le informazioni dei file mediante il comando
+  ls -l
+  - Cosa si puo' notare nella seconda colonna dell'output?
+  - Perche' i file non hanno tutti la stessa dimensione?
+- Verificare che il contenuto dei tre file creati sia lo stesso
+  del file originale mediante il comando diff.
+  - Perche' sebbene il file "lab01e03in.sl" abbia una dimensione
+    diversa dagli altri ha lo stesso contenuto?
+- Aprire il file "lab01e03in.txt" con un editor di testo a
+  piacere e modificarne il contenuto
+  - Come ci si aspetta che vengano modificate le informazioni
+    di dimensione e data di ultima modifica dei file?
+    Perche'?
+  - Verificare la risposta mediante il comando
+    ls -l
+  - Quali modifiche ci si aspetta riguardo al contenuto
+    dei file? Perche'?
+  - Verificare la risposta confrontando nuovamente i tre
+    file creati con l'originale mediante il comando diff
+- Rinominare il file "lab01e03in.txt" in "lab01e03in.backup"
+  - Che cosa si puo' notare ora dall'output del comando ls -l?
+  - Confrontare il contenuto del file "lab01e03in.backup" con
+    quello dei file "lab01e03in.hl" e "lab01e03in.sl".
+    Perche' nel secondo caso si ottiene un messaggio d'errore?
+- Creare un nuovo file vuoto di nome "lab01e03in.txt"
+  - Quale ci si aspetta sia diventato ora il contenuto del
+    file "lab01e03in.sl"? Perche'?
+  - Verificare mediante il comando cat
+
+Osservazione
+------------
+
+Il comando
+touch <nomefile>
+permette di aggiornare la data e ora di ultima modifica di un
+file.
+Nel caso in cui il file specificato non esista crea un file vuoto
+con quel nome.

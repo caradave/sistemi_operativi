@@ -1,0 +1,7 @@
+Esercizio 01
+Installazione Linux
+-------------------
+
+Nel caso si possegga un portatile e lo si desideri fare, installare la
+versione di Linux desiderata (Ubuntu, Mint, etc.) con le modalità
+preferite (dual boot, macchina virtuale, docker).

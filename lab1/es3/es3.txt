@@ -1,0 +1,19 @@
+Verificare:
+- il proprio username e il gruppo di appartenenza.
+  E' possibile modificarli?
+- la disposizione della propria home all'interno della gerarchia del
+  file system del sistema utilizzato.
+- la struttura della home del sistema (e.g., quali sottodirettori
+  possiede, etc.)
+- i diritti di lettura e scrittura sui vari direttori. 
+  E' possibile modificare i diritti di accesso della propria home
+  directory?
+- verificare che cosa succede se si eliminano i diritti di lettura
+  o di esecuzione a un direttorio.
+  Per la modifica dei diritti si utilizzi sia la notazione ottale
+  (e.g., "654", sia quella a caratteri, "+uw-gx").
+
+Come e' possibile modificare nello stesso modo i diritti di accesso a
+*tutti* i file e direttori di un albero di direttori (ad esempio
+eliminare il diritto di lettura a tutti, user, group, other, del
+direttorio soEx01backup)?

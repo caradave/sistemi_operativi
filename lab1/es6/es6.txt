@@ -1,0 +1,21 @@
+- Compilare il programma dell'esercizio precedente mediante
+  un Makefile contenente solo il target di compilazione.
+
+- Modificare il Makefile precedente aggiungendo il target
+  install, in grado di
+  a - creare un direttorio fratello a quello di lavoro e di
+      nome bin
+  b - spostare l'eseguibile creato in tale direttorio
+
+- Modificare il Makefile precedente aggiungendo il target clean,
+  che rimuove il file oggetto nel direttorio corrente
+
+- Modificare il Makefile precedente aggiungendo il target
+  distclean che richiama il target clean e cancella il
+  direttorio bin fratello di quello corrente e tutto il suo
+  contenuto
+
+- Si modifichi il Makefile precedente utilizzando delle variabili
+  per specificare il compilatore, le opzioni di compilazione
+  e eventualmente il nome del file.
+  

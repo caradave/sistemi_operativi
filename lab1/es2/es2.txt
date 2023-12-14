@@ -1,0 +1,44 @@
+- Parte 01
+  Creare il seguente albero di directory nella propria home:
+
+               soEx01
+                  |
+      ------------------------
+      |           |          |
+     src         bin       test
+      |                      |
+   ----------            -----------
+   |        |            |         |
+  include  lib         script   results
+
+- Parte 02
+  Scaricare dalla pagina web il file
+  lab01e01in.txt
+  copiarlo nella directory src, quindi, utilizzando tale direttorio
+  come direttorio corrente, copiarlo nei direttori test, script
+  e results utilizzando solo path assoluti.
+  Verificare che i file creati esistano, e controllarne i diritti,
+  Utilizzare i comandi more, less e cat per verificarne il contenuto.
+  Utilizzare il comando diff per verificare abbiano lo stesso contenuto.
+  Sempre senza cambiare il direttorio corrente, cancellare tutti i
+  file creati utilizzando solo path relativi.
+  Ripetere la stessa sequenza di operazioni dal direttorio padre
+  di src, ovvero soEx01.
+
+- Parte 03
+  Impartendo tutti i comandi dalla radice del proprio utente si
+  effettui quanto segue.
+  Copiare l'intero albero di direttori soEx01 in soEx01backup usando
+  il comando "cp" per file singoli e "mkdir" per i direttori.
+  Cancellare interamente soEx01 usando il comando "rm" per file
+  singoli e "rmdir" per i direttori.
+  Ripetere tanto l'operazione di copia quanto quella di cancellazione
+  utilizzando le versioni ricorsive dei comandi "cp" e "rm".
+
+- Parte 04
+  Verificare funzionamento e utilita' dei comandi:
+  pwd, wc, history
+
+  In caso di problemi ricordarsi del manuale in linea, ovvero che
+  man <comando>
+  fornisce informazioni su "comando".
