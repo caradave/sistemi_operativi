@@ -1,0 +1,24 @@
+
+Un programma riceve due valori interi sulla riga di comando,
+denominati n e t.
+Il programma (processo padre) deve eseguire 2 figli e terminare.
+Ciascun figlio deve eseguire a sua volta due figli e terminare.
+Il procedimento deve andare avanti sino a quando sono in esecuzione
+i 2^n processi sulle foglie dell'albero.
+Questi ultimi aspettano per t secondi e visualizzano (a video)
+un messaggio di terminazione.
+Si noti che ogni processo (ad albero) ne esegue altri due.
+Solo quelli sulle foglie dell'albero dormono e visualizzano un
+messaggio.
+Qual e' l'ordine di terminazione dei processi?
+E' sempre lo stesso?
+Come si possono riconoscere (ppid)?
+
+Una volta eseguito il programma:
+A. cercare il pid dei vari processi con il comando ps
+   - dalla stessa shell
+   - da un'altra shell
+B. terminare l'esecuzione di alcuni processi
+   con il comando kill eseguito
+   - dalla stessa shell
+   - da un'altra shell

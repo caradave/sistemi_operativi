@@ -1,0 +1,23 @@
+Utilizzando le system call fork e wait, realizzare il seguente
+grafo di precedenza.
+
+        P1
+       /  \ 
+      /    \ 
+    P2      P3
+    /\      /\
+   /  \    /  \
+ P4   P5  |   P6
+   \  /    \  /
+    \/      \/
+    P7      P8
+      \    /
+       \  / 
+        P9
+
+Si osservi che tutti gli archi sono orientati verso il basso.
+Ogni processo Pi corrisponda a un messaggio di stampa
+(si stampi la stringa "Pi" e il PID del processo).
+
+Verificare le precedenza siano rispettate inserendo delle
+system call sleep nei vari rami del programma.
