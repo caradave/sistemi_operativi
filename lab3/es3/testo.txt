@@ -1,4 +1,3 @@
-/*
 Un file contiene delle stringhe logicamente raggruppate in
 insiemi distinti.
 Ogni insieme di stringhe indica un comando Unix/Linux e i
@@ -23,38 +22,3 @@ nel file utilizzando:
 * la system call exec eseguendo un comando ogni 3 secondi.
   (e' facolta' decidere quale versione della exec
   utilizzare).
-*/
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-
-void exec_command(char **command, int i);
-
-int main(void){
-    FILE *infile = fopen("comandi.txt", "r");
-    char **comandi = malloc(10*(sizeof(char *)));
-    int i = 0;
-
-    while(!feof(infile)){
-        comandi[i] = malloc(50*sizeof(char));
-        fgets(comandi[i], 50, infile);
-        i++;
-    }
-
-    for(int k=0; k<i; k++){
-        if(fork()){
-            exec_command(comandi, k);
-            exit(0);            
-        }
-        sleep(2);
-    }
-
-    return 0;
-}
-
-void exec_command(char **command, int i){
-    system(command[i]);
-}

@@ -1,4 +1,4 @@
-i riporti l'albero di generazione dei processi a seguito
+Si riporti l'albero di generazione dei processi a seguito
 dell'esecuzione del seguente tratto di codice C.
 Si indichi inoltre che cosa esso produce su video e per quale
 motivo.
@@ -22,7 +22,4 @@ int main () {
   }
 
   return (0);
-} 
-
-
-
+}

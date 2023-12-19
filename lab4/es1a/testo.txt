@@ -1,0 +1,16 @@
+A.
+Scrivere un programma C in grado di leggere dei valori
+interi e stampare su standard output
+fprintf (stdout, ...);
+i numeri pari e su standard error (stderr)
+fprintf (stderr, ...);
+i numeri dispari.
+Il programma termini una volta introdotto il valore nullo.
+
+Si utilizzi la ridirezione per:
+- leggere gli interi dal file "inFile.txt",
+  invece che da standard input
+- scrivere i valori pari su file "pariFile.txt",
+  invece che su standard output
+- scrivere i valori dispari su file "dispariFile.txt",
+  invece che su standard error.

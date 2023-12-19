@@ -7,96 +7,161 @@ Esercitazione di laboratorio numero 04
 
 
 
-Esercizio 01
-System call fork, exec, system
------------------------------
+Esercizio 01 (A & B)
+Comandi di shell per processi e ridirezione
+-------------------------------------------
 
-Si riporti l'albero di generazione dei processi a seguito
-dell'esecuzione del seguente tratto di codice C.
-Si indichi inoltre che cosa esso produce su video e per quale
-motivo.
+A.
+Scrivere un programma C in grado di leggere dei valori
+interi e stampare su standard output
+fprintf (stdout, ...);
+i numeri pari e su standard error (stderr)
+fprintf (stderr, ...);
+i numeri dispari.
+Il programma termini una volta introdotto il valore nullo.
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+Si utilizzi la ridirezione per:
+- leggere gli interi dal file "inFile.txt",
+  invece che da standard input
+- scrivere i valori pari su file "pariFile.txt",
+  invece che su standard output
+- scrivere i valori dispari su file "dispariFile.txt",
+  invece che su standard error.
 
-int main () {
-  char str[100];
-  int i;
-
-  setbuf(stdout,0);
-  fork();
-  for (i=0; i<2; i++){
-    if (fork()!=0) {
-      sprintf (str, "echo system with i=%d", i);
-      system (str);
-    } else {
-      sprintf (str, "exec with i=%d", i);
-      execlp ("echo", "myPgrm", str, NULL);
-    }
-  }
-  return (0);
-}
+B.
+Utilizzare pipe e ridirezione su comandi di shell
+per effettuare le seguenti operazioni:
+- contare il numero di file/direttori di primo livello
+  all'interno della propria cartella "home"
+- una volta scaricati i testi del laboratorio in un
+  qualsiasi direttorio, visualizzare il numero totale di
+  stringhe nei file lab01.txt, lab02.txt, e lab03.txt
+- contare il numero di processi attivi sul sistema che hanno
+  come proprietario l'utente "root". (Suggerimento: si 
+  ispezioni mediante il comando man, l'opzione -U del comando
+  ps)
 
 
 
 Esercizio 02
-System call fork, exec, system 
-------------------------------
+Exchange-sort concorrente su file
+---------------------------------
 
-Si riporti l'albero di generazione dei processi a seguito
-dell'esecuzione del seguente tratto di codice C.
-Si indichi inoltre che cosa esso produce su video e per quale
-motivo.
+Premessa numero 1.
+L'algoritmo di ordinamento per scambio (exchange-sort o
+bubble-sort) ordina un vettore mediante il confronto di
+elementi contigui.
+La seguente e' una possibile implementazione (con ordinamento
+del vettore v di n elementi):
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-int main () {
-  int i = 0;
-
-  setbuf(stdout,0);
-  while (i<=2 && fork()){
-    if (!fork()) {
-      fprintf (stdout, "Running Exec ...");
-      execlp ("echo", "echo", "i*i", (char *) 0);
+for (i=0; i<n-1; i++) {
+  for (j=0; j<n-1-i; j++) {
+    if (v[j] > v[j+1]) {
+       val = v[j];
+       v[j] = v[j+1];
+       v[j+1] = val;
     }
-    i++;
-    fprintf (stdout, "Running System ...");
-    system ("echo i+i");
   }
+}
 
-  return (0);
-} 
+Premessa numero 2.
+Un  file binario puo' essere scritto (funzione UNIX write)
+e letto (funzione unix read) in maniera casuale utilizzando
+la funzione lseek.
+
+Ad esempio, il programma
+lab04ex02.c
+una volta ricevuto il nome di un file sulla riga di comando,
+- scrive nel file il vettore vet di 12 elementi
+- rilegge il file a partire dall'ultima riga.
+
+Specifiche dell'esercizio.
+Si implementi in maniera *concorrente* e *multi-processo*
+l'algortimo di bubble-sort.
+L'algoritmo, utilizzando le system call fork e wait e
+condividendo dati su file (i.e., leggendo e scrivendo dati sullo
+stesso file) deve effettuare l'ordinamento del file stesso.
+
+Il programma (il padre):
+- riceve sulla riga di comando il nome di un file contenente
+  un numero predefinito n di interi.
+- a ogni iterazione del ciclo esterno "simula" l'azione
+  del ciclo interno generando (n-1-i) processi figlio.
+
+Ognuno dei figli
+  - legge due elementi adiacenti nel file
+  - ne effettua lo scambio qualora necessario
+  - li riscrive su file
+  - si sincronizza con gli altri processi figli per
+    generare l'effetto globale di ordinamento (i.e.,
+    a ogni iterazione del ciclo esterno il valore
+    maggiore tra quelli rimanenti, viene spostato in
+    fondo al file)
+  - termina.
+
+Osservazioni
+------------
+
+1. Operare su file e' indispensabile in quanto un processo padre
+   e uno figlio non condividono lo spazio di indirizzamento (quindi
+   ordinando un vettore, ordinerebbero di fatto vettori diversi).
+2. Il programma puo' essere generalizzato facendo in modo che
+   il primo degli interi memorizzati su file indichi il numero
+   di interi successivi presenti nel file.
+3. Gestire un file binario semplifica il posizionamento
+   sul dato di posizione i.
+   Infatti, nel caso di file ASCII, il numero di caratteri occupati
+   da un intero non sarebbe costante, come nel caso di file binari,
+   ma dipenderebbe dal suo valore:
+   - 5 -> codifica ASCII = 1 carattere
+       -> codifica binaria = sizeof (int) byte,
+   - 12345 -> codifica ASCII = 5 caratteri
+           -> codifica binaria = sizeof (int) byte
+   Inoltre nel primo caso occorrerebbe contare anche caratteri 
+   "aggiuntivi", quali il '\n' di fine riga.
 
 
 
 Esercizio 03
-System call fork, wait, exec, system
------------------------------------
+Utilizzo di segnali
+-------------------
 
-Un file contiene delle stringhe logicamente raggruppate in
-insiemi distinti.
-Ogni insieme di stringhe indica un comando Unix/Linux e i
-relativi parametri.
-Ogni insieme e' terminato dalla stringa "end".
-Il seguente e' un esempio corretto di file:
+Scrivere un programma che mediante l'utilizzo di segnali
+sincronizzi due processi (un padre e un figlio) in modo che
+stampino alternativamente uno specifico messaggio.
+Il seguente e' un esempio di output:
 
-ls -laR end
-less mioFile.c end
-mkdir tmpDir end
-cp mioFile.c tmpDir end
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+...
 
-Si osservi che, se si preferisce, si puo' supporre la stringa
-"end" non sia presente nel file e sia invece il carattere di
-fine riga '\n' a indicare la fine delle stringhe associate
-a un certo comando.
+Inserire sleep opportune per evitare corse critiche.
 
-Scrivere un programma che, ricevuto il nome del file sulla
-riga di comando, esegua i comandi Unix/linux indicati
-nel file utilizzando:
-* la system call system, eseguendo un comando dopo l'altro
-* la system call exec eseguendo un comando ogni 3 secondi.
-  (e' facolta' decidere quale versione della exec
-  utilizzare).
+
+
+Esercizio 04
+Segnali e comunicazione mediante file
+-------------------------------------
+
+Implementare un programma C che crea due figli, un produttore
+e un consumatore.
+Il figlio produttore legge da tastiera delle stringhe e le
+trasferisce al consumatore.
+Il figlio consumatore converte le stringhe in caratteri maiuscoli
+e le visualizza su standard output.
+L'introduzione della stringa "end" termina entrambi i processi
+figli e quindi il processo padre, in sequenza.
+Il trasferimento delle stringhe avvenga attraverso file.
+
+Suggerimenti
+1) Derivare la soluzione da quella dell'esercizio precedente
+2) I processi che comunicano non sono padre e figlio ma due
+   "fratelli"; quindi occorre fare in modo che ciascun
+   figlio conosca il PID del processo "fratello".
+

@@ -12,7 +12,6 @@ per effettuare le seguenti operazioni:
   ps)
 
 
-
 > ls -laR /home/... | wc --lines
 > cat lab01.txt lab02.txt lab03.txt | wc --bytes
 > ps -aux | grep root | wc --lines
