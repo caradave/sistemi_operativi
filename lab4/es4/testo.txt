@@ -1,0 +1,15 @@
+Implementare un programma C che crea due figli, un produttore
+e un consumatore.
+Il figlio produttore legge da tastiera delle stringhe e le
+trasferisce al consumatore.
+Il figlio consumatore converte le stringhe in caratteri maiuscoli
+e le visualizza su standard output.
+L'introduzione della stringa "end" termina entrambi i processi
+figli e quindi il processo padre, in sequenza.
+Il trasferimento delle stringhe avvenga attraverso file.
+
+Suggerimenti
+1) Derivare la soluzione da quella dell'esercizio precedente
+2) I processi che comunicano non sono padre e figlio ma due
+   "fratelli"; quindi occorre fare in modo che ciascun
+   figlio conosca il PID del processo "fratello".

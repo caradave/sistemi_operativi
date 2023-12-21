@@ -1,0 +1,16 @@
+Scrivere un programma che mediante l'utilizzo di segnali
+sincronizzi due processi (un padre e un figlio) in modo che
+stampino alternativamente uno specifico messaggio.
+Il seguente e' un esempio di output:
+
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+Child Woke-up
+Father Woke-up
+...
+
+Inserire sleep opportune per evitare corse critiche.
