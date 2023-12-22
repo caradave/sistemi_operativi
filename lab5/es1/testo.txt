@@ -1,0 +1,23 @@
+Implementare la soluzione del laboratorio 5, esercizio 4 realizzando
+la comunicazione tra i due processi mediante una pipe.
+
+Ovvero, si realizzi un programma C che crea due figli, un produttore
+e un consumatore.
+Il figlio produttore legge da tastiera delle stringhe e le trasferisce
+al consumatore.
+Il figlio consumatore converte le stringhe in caratteri maiuscoli e
+le visualizza su standard output.
+L'introduzione della stringa "end" termina entrambi i processi figli
+nonche' il processo padre.
+Il trasferimento delle stringhe avvenga attraverso pipe.
+
+Osservazione
+------------
+
+La lunghezza delle stringhe trasferite nella pipe e' variabile e
+ignota a priori.
+E' quindi opportuno utilizzare un qualche meccanismo/protocollo di
+comunicazione.
+Ad esempio, e' possibile trasferire sulla pipe la dimensione della
+stringa prima della stringa stessa, utilizzando un numero costante
+di caratteri per codificare tale dimensione.

@@ -1,0 +1,29 @@
+Sia dato il file di nome
+lab05e04in.txt
+contenente l'elenco degli iscritti al corso di "Algorithms and programming"
+nell'anno accademico 2012-2013 (fonte: sito del Politecnico di Torino,
+servizi per gli studenti, iscritti ai corsi, con leggere modifiche manuali).
+
+Utilizzando i filtri noti (comandi sort, grep, etc.) e le pipe
+visualizzare a video:
+01. L'elenco degli stessi dati ordinati per numero di matricola inversa
+    (attenzione alla posizione dei numeri di matricola 89499 e 94799)
+02. L'elenco degli stessi dati ordinati per cognome.
+03. L'elenco degli studenti che hanno frequentato nel 2011-2012.
+04. L'elenco degli studenti informatici (INF1T3) ordinato per
+    numero di matricola.
+05. L'elenco degli studenti il cui numero di matricola
+    termina  per 2 oppure per 4 ordinato per cognome.
+06. L'elenco degli studenti TLC (TLC1T3), che devono ancora
+    frequentare, ordinato in ordine decrescente per numero
+    di matricola.
+07. L'elenco degli studenti in cui il nome contiene due
+    lettere "A" separate da due qualsiasi caratteri.
+08. L'elenco degli studenti in cui il nome contiene due
+    lettere "A" separate da due qualsiasi caratteri purche' le
+    "A" non inizino o finiscano il nome stesso.
+09. Prelevare solo i numeri di matricola dal file, eliminare tutte
+    le cifre uguali a 0, sostituire tutte le cifre uguali a 8 con
+    1, ordinare l'elenco risultante e eliminare tutti i duplicati.
+10. Effettuare le stesse operazioni del punto 9, ma visualizzare
+    solo le righe duplicate, effettuandone il conteggio.

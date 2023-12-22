@@ -1,0 +1,26 @@
+Dato che la lettura da una pipe e' una operazione "bloccante" le
+pipe possono essere utilizzare per garantire una sincronizzazione
+"rigorosa" tra i processi.
+Piu' nel dettaglio, utilizzando due pipe tra due processi, il primo
+processo puo' attendere il secondo tramite una lettura sulla prima
+pipe e il secondo puo' attendere il primo tramite una lettura sulla
+seconda pipe.
+
+Utilizzando questo meccanismo, si realizzi il seguente procedimento.
+Un processo padre genera un processo figlio.
+Dopo la creazione entrambi i processi desiderano inviare messaggi su
+standard output (oppure su un file, a scelta) sincronizzandosi in
+modo che i messaggi siano (rigorosamente) alternati, ad esempio:
+
+I'm the father (PID=...)
+I'm the child  (PID=...)
+I'm the father (PID=...)
+I'm the child  (PID=...)
+I'm the father (PID=...)
+I'm the child  (PID=...)
+...
+
+Si noti che non si devono utilizzare sleep o pause, e non si deve
+scrivere codice soggetto a corse critiche.
+Il padre invii al figlio un messaggio di sincronizzazione particolare
+nel caso l'esecuzione debba essere terminata.

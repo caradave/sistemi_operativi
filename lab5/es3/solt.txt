@@ -1,0 +1,6 @@
+a) 
+    vado cercando i fle di testo con dimensine suepriore a 1024 byte
+    find Scrivania/ -size +1024c -regex ".*/.text"
+
+b)
+    stessa cosa di sopra, evidenziando i .c e con dimensione suepriore ai 100 byte

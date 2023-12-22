@@ -6,162 +6,135 @@ Esercitazione di laboratorio numero 05
 --------------------------------------
 
 
+Esercizio 01
+Segnali e pipe
+--------------
 
-Esercizio 01 (A & B)
-Comandi di shell per processi e ridirezione
--------------------------------------------
+Implementare la soluzione del laboratorio 5, esercizio 4 realizzando
+la comunicazione tra i due processi mediante una pipe.
 
-A.
-Scrivere un programma C in grado di leggere dei valori
-interi e stampare su standard output
-fprintf (stdout, ...);
-i numeri pari e su standard error (stderr)
-fprintf (stderr, ...);
-i numeri dispari.
-Il programma termini una volta introdotto il valore nullo.
+Ovvero, si realizzi un programma C che crea due figli, un produttore
+e un consumatore.
+Il figlio produttore legge da tastiera delle stringhe e le trasferisce
+al consumatore.
+Il figlio consumatore converte le stringhe in caratteri maiuscoli e
+le visualizza su standard output.
+L'introduzione della stringa "end" termina entrambi i processi figli
+nonche' il processo padre.
+Il trasferimento delle stringhe avvenga attraverso pipe.
 
-Si utilizzi la ridirezione per:
-- leggere gli interi dal file "inFile.txt",
-  invece che da standard input
-- scrivere i valori pari su file "pariFile.txt",
-  invece che su standard output
-- scrivere i valori dispari su file "dispariFile.txt",
-  invece che su standard error.
+Osservazione
+------------
 
-B.
-Utilizzare pipe e ridirezione su comandi di shell
-per effettuare le seguenti operazioni:
-- contare il numero di file/direttori di primo livello
-  all'interno della propria cartella "home"
-- una volta scaricati i testi del laboratorio in un
-  qualsiasi direttorio, visualizzare il numero totale di
-  stringhe nei file lab01.txt, lab02.txt, e lab03.txt
-- contare il numero di processi attivi sul sistema che hanno
-  come proprietario l'utente "root". (Suggerimento: si 
-  ispezioni mediante il comando man, l'opzione -U del comando
-  ps)
+La lunghezza delle stringhe trasferite nella pipe e' variabile e
+ignota a priori.
+E' quindi opportuno utilizzare un qualche meccanismo/protocollo di
+comunicazione.
+Ad esempio, e' possibile trasferire sulla pipe la dimensione della
+stringa prima della stringa stessa, utilizzando un numero costante
+di caratteri per codificare tale dimensione.
 
 
 
 Esercizio 02
-Exchange-sort concorrente su file
----------------------------------
+Pipe e sincronizzazione
+-----------------------
 
-Premessa numero 1.
-L'algoritmo di ordinamento per scambio (exchange-sort o
-bubble-sort) ordina un vettore mediante il confronto di
-elementi contigui.
-La seguente e' una possibile implementazione (con ordinamento
-del vettore v di n elementi):
+Dato che la lettura da una pipe e' una operazione "bloccante" le
+pipe possono essere utilizzare per garantire una sincronizzazione
+"rigorosa" tra i processi.
+Piu' nel dettaglio, utilizzando due pipe tra due processi, il primo
+processo puo' attendere il secondo tramite una lettura sulla prima
+pipe e il secondo puo' attendere il primo tramite una lettura sulla
+seconda pipe.
 
-for (i=0; i<n-1; i++) {
-  for (j=0; j<n-1-i; j++) {
-    if (v[j] > v[j+1]) {
-       val = v[j];
-       v[j] = v[j+1];
-       v[j+1] = val;
-    }
-  }
-}
+Utilizzando questo meccanismo, si realizzi il seguente procedimento.
+Un processo padre genera un processo figlio.
+Dopo la creazione entrambi i processi desiderano inviare messaggi su
+standard output (oppure su un file, a scelta) sincronizzandosi in
+modo che i messaggi siano (rigorosamente) alternati, ad esempio:
 
-Premessa numero 2.
-Un  file binario puo' essere scritto (funzione UNIX write)
-e letto (funzione unix read) in maniera casuale utilizzando
-la funzione lseek.
+I'm the father (PID=...)
+I'm the child  (PID=...)
+I'm the father (PID=...)
+I'm the child  (PID=...)
+I'm the father (PID=...)
+I'm the child  (PID=...)
+...
 
-Ad esempio, il programma
-lab05ex02.c
-una volta ricevuto il nome di un file sulla riga di comando,
-- scrive nel file il vettore vet di 12 elementi
-- rilegge il file a partire dall'ultima riga.
-
-Specifiche dell'esercizio.
-Si implementi in maniera *concorrente* e *multi-processo*
-l'algortimo di bubble-sort.
-L'algoritmo, utilizzando le system call fork e wait e
-condividendo dati su file (i.e., leggendo e scrivendo dati sullo
-stesso file) deve effettuare l'ordinamento del file stesso.
-
-Il programma (il padre):
-- riceve sulla riga di comando il nome di un file contenente
-  un numero predefinito n di interi.
-- a ogni iterazione del ciclo esterno "simula" l'azione
-  del ciclo interno generando (n-1-i) processi figlio.
-
-Ognuno dei figli
-  - legge due elementi adiacenti nel file
-  - ne effettua lo scambio qualora necessario
-  - li riscrive su file
-  - si sincronizza con gli altri processi figli per
-    generare l'effetto globale di ordinamento (i.e.,
-    a ogni iterazione del ciclo esterno il valore
-    maggiore tra quelli rimanenti, viene spostato in
-    fondo al file)
-  - termina.
-
-Osservazioni
-------------
-
-1. Operare su file e' indispensabile in quanto un processo padre
-   e uno figlio non condividono lo spazio di indirizzamento (quindi
-   ordinando un vettore, ordinerebbero di fatto vettori diversi).
-2. Il programma puo' essere generalizzato facendo in modo che
-   il primo degli interi memorizzati su file indichi il numero
-   di interi successivi presenti nel file.
-3. Gestire un file binario semplifica il posizionamento
-   sul dato di posizione i.
-   Infatti, nel caso di file ASCII, il numero di caratteri occupati
-   da un intero non sarebbe costante, come nel caso di file binari,
-   ma dipenderebbe dal suo valore:
-   - 5 -> codifica ASCII = 1 carattere
-       -> codifica binaria = sizeof (int) byte,
-   - 12345 -> codifica ASCII = 5 caratteri
-           -> codifica binaria = sizeof (int) byte
-   Inoltre nel primo caso occorrerebbe contare anche caratteri 
-   "aggiuntivi", quali il '\n' di fine riga.
+Si noti che non si devono utilizzare sleep o pause, e non si deve
+scrivere codice soggetto a corse critiche.
+Il padre invii al figlio un messaggio di sincronizzazione particolare
+nel caso l'esecuzione debba essere terminata.
 
 
 
 Esercizio 03
-Utilizzo di segnali
--------------------
+Comando find
+------------
 
-Scrivere un programma che mediante l'utilizzo di segnali
-sincronizzi due processi (un padre e un figlio) in modo che
-stampino alternativamente uno specifico messaggio.
-Il seguente e' un esempio di output:
-
-Child Woke-up
-Father Woke-up
-Child Woke-up
-Father Woke-up
-Child Woke-up
-Father Woke-up
-Child Woke-up
-Father Woke-up
-...
-
-Inserire sleep opportune per evitare corse critiche.
+Eseguire le seguenti operazioni con il comando find:
+1. Visualizzare l'elenco di file dell'albero radicato in "/" che
+   abbiano estensione ".exe", dimensione maggiore di 1024 byte,
+   e siano eseguibili. 
+2. Stampare il path di tutti i file .c con una dimensione maggiore
+   di 100 bytes.
+3. Rintracciare tutti i file del proprio utente di tipo regolare,
+   che contengano nel nome almeno una "a" e almeno una "A" in
+   qualunque ordine (a...A oppure A..a).
+   Di tali file visualizzare le ultime 3 righe.
+4. Rintracciare tutti i file del proprio utente dal livello
+   di profondita' 3 al livello di profondita' 5, la cui dimensione
+   sia di almeno 250 byte, abbiano un nome di esattamente 4 caratteri,
+   Di tali file conteggiare il numero di caratteri.
+   Ripetere la stessa operazione conteggiando il numero di righe.
+5. Rintracciare tutti i file nel sistema con qualsiasi estensione di
+   3 caratteri, il cui nome inizi per "A" e abbiano 3 "z" consecutive
+   nel nome.
+   Di tali file create la versione compatta (si veda il manuale, man,
+   de comando gzip).
+6. Stampare il contenuto di tutti i direttori che si chiamano
+   bin a partire dal direttorio radice del file system.
+7. Cercare tutti i file ".c" degli altri utenti (escluso il
+   proprio!) appartenenti al proprio gruppo.
+8. Modificare i permessi di tutti i propri file nel primo livello
+   gerarchico del sotto-albero della radice, in modo che tutti
+   gli utenti diversi dal proprietario non abbiano alcun permesso.
 
 
 
 Esercizio 04
-Segnali e comunicazione mediante file
--------------------------------------
+Filtri
+------------
 
-Implementare un programma C che crea due figli, un produttore
-e un consumatore.
-Il figlio produttore legge da tastiera delle stringhe e le
-trasferisce al consumatore.
-Il figlio consumatore converte le stringhe in caratteri maiuscoli
-e le visualizza su standard output.
-L'introduzione della stringa "end" termina entrambi i processi
-figli e quindi il processo padre, in sequenza.
-Il trasferimento delle stringhe avvenga attraverso file.
+Sia dato il file di nome
+lab05e04in.txt
+contenente l'elenco degli iscritti al corso di "Algorithms and programming"
+nell'anno accademico 2012-2013 (fonte: sito del Politecnico di Torino,
+servizi per gli studenti, iscritti ai corsi, con leggere modifiche manuali).
 
-Suggerimenti
-1) Derivare la soluzione da quella dell'esercizio precedente
-2) I processi che comunicano non sono padre e figlio ma due
-   "fratelli"; quindi occorre fare in modo che ciascun
-   figlio conosca il PID del processo "fratello".
+Utilizzando i filtri noti (comandi sort, grep, etc.) e le pipe
+visualizzare a video:
+01. L'elenco degli stessi dati ordinati per numero di matricola inversa
+    (attenzione alla posizione dei numeri di matricola 89499 e 94799)
+02. L'elenco degli stessi dati ordinati per cognome.
+03. L'elenco degli studenti che hanno frequentato nel 2011-2012.
+04. L'elenco degli studenti informatici (INF1T3) ordinato per
+    numero di matricola.
+05. L'elenco degli studenti il cui numero di matricola
+    termina  per 2 oppure per 4 ordinato per cognome.
+06. L'elenco degli studenti TLC (TLC1T3), che devono ancora
+    frequentare, ordinato in ordine decrescente per numero
+    di matricola.
+07. L'elenco degli studenti in cui il nome contiene due
+    lettere "A" separate da due qualsiasi caratteri.
+08. L'elenco degli studenti in cui il nome contiene due
+    lettere "A" separate da due qualsiasi caratteri purche' le
+    "A" non inizino o finiscano il nome stesso.
+09. Prelevare solo i numeri di matricola dal file, eliminare tutte
+    le cifre uguali a 0, sostituire tutte le cifre uguali a 8 con
+    1, ordinare l'elenco risultante e eliminare tutti i duplicati.
+10. Effettuare le stesse operazioni del punto 9, ma visualizzare
+    solo le righe duplicate, effettuandone il conteggio.
+   
 

@@ -1,0 +1,27 @@
+Eseguire le seguenti operazioni con il comando find:
+1. Visualizzare l'elenco di file dell'albero radicato in "/" che
+   abbiano estensione ".exe", dimensione maggiore di 1024 byte,
+   e siano eseguibili. 
+2. Stampare il path di tutti i file .c con una dimensione maggiore
+   di 100 bytes.
+3. Rintracciare tutti i file del proprio utente di tipo regolare,
+   che contengano nel nome almeno una "a" e almeno una "A" in
+   qualunque ordine (a...A oppure A..a).
+   Di tali file visualizzare le ultime 3 righe.
+4. Rintracciare tutti i file del proprio utente dal livello
+   di profondita' 3 al livello di profondita' 5, la cui dimensione
+   sia di almeno 250 byte, abbiano un nome di esattamente 4 caratteri,
+   Di tali file conteggiare il numero di caratteri.
+   Ripetere la stessa operazione conteggiando il numero di righe.
+5. Rintracciare tutti i file nel sistema con qualsiasi estensione di
+   3 caratteri, il cui nome inizi per "A" e abbiano 3 "z" consecutive
+   nel nome.
+   Di tali file create la versione compatta (si veda il manuale, man,
+   de comando gzip).
+6. Stampare il contenuto di tutti i direttori che si chiamano
+   bin a partire dal direttorio radice del file system.
+7. Cercare tutti i file ".c" degli altri utenti (escluso il
+   proprio!) appartenenti al proprio gruppo.
+8. Modificare i permessi di tutti i propri file nel primo livello
+   gerarchico del sotto-albero della radice, in modo che tutti
+   gli utenti diversi dal proprietario non abbiano alcun permesso.
