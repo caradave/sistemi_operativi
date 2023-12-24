@@ -4,3 +4,17 @@ a)
 
 b)
     stessa cosa di sopra, evidenziando i .c e con dimensione suepriore ai 100 byte
+
+c)
+    due versioni di questo comando:
+        se le possono essere in una qualuqne posizone del percorso del file
+        se le a devono essere la prima e l'ultima lettera del full path del file
+    find /home -regex ".*a.*A.*" && find /home -regex ".*A.*a.*"
+    find /home -regex "a.*/A" && find /home -regex "A.*/a"
+
+d) è comunque un'espressione regolare, ma per usare -name devo usare la notazione di shell
+    find -mindepth 3 -maxdepth 5 -size +250c -name '????.*'
+
+e)
+    
+

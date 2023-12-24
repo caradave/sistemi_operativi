@@ -1,0 +1,29 @@
+3)
+    sort -k 1 < lab05e04in.txt
+
+2)
+    sort -k 2 < lab05e04in.txt
+
+3)
+    grep Frequentato lab05e04in.txt
+
+4)
+
+
+5)
+    grep "^.....2 *" lab05e04in.txt && grep "^.....4 *" lab05e04in.txt | sort -k 2
+
+6)
+    grep "TLC1T3" lab05e04in.txt | grep "Da frequentare" |  sort -k 1
+
+7)
+    grep -e "A..A" lab05e04in.txt
+
+8)
+    grep -e "[^ ]A[^ ][^ ]A[^ ]" lab05e04in.txt
+
+9)
+    cut --f -2 -d " " lab05e04in.txt | tr -d 0 | tr 8 1 | sort-n | uniq
+
+10) 
+    cut -d ' ' -f 1 lab05e04in.txt | tr -d 0 | tr 8 1 | sort -n | uniq -d
