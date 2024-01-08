@@ -1,0 +1,36 @@
+Un file di testo (ASCII) ha formato indefinito, ovvero include
+un numero indefinito di righe ciascuna delle quali comprende
+un numero indefinito di stringhe.
+
+Si scriva uno script bash in grado di visualizzare su standard
+output la frequenza assoluta di tutte le stringhe presenti nel
+file.
+
+Esempio
+-------
+
+Sia il file di ingresso il seguente:
+
+
+mi illumino di immenso
+illumino di immenso
+di immenso
+immenso
+
+Occorre visualizzare (in qualunque ordine)
+
+immenso 4
+di 3
+illumino 2
+mi 1
+
+Si supponga che il nome del file di ingresso sia indicato sulla
+riga di comando, ma nel caso e in cui non sia presente sulla riga
+di comando, venga letto da tastiera.
+
+Suggerimenti
+------------
+
+- si utilizzino due vettori, uno per la memorizzazione delle parole
+  e uno per la memorizzazione delle relative frequenza assolute.
+- si leggano le stringhe del file con il costrutto "for-in + cat".

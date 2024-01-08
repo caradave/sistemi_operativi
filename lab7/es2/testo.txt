@@ -1,0 +1,7 @@
+Realizzare uno script bash che:
+- riceva in ingresso (da riga di comando oppure da tastiera)
+  il nome di un file
+- visualizzi (a video) il numero di caratteri della linea piu'
+  lunga e il numero di righe del file stesso.
+Si supponga che le righe del file non contengano spazi.
+

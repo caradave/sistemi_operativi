@@ -1,0 +1,13 @@
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab4/es3/es3.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab4/es4/es4.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab4/es2/es2.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab4/es1a/es1a.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab2/es3/es3.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab2/es2/es2.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab5/es1/es1.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab5/es2/es2.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab3/es3/es3.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab6/es1/es1.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab6/es1/lab06e01recursive.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab1/es5/es5-posix.c
+Scrivania/polito/IV anno/sistemi operativi/github/sistemi_operativi/lab1/es5/es5-standard.c

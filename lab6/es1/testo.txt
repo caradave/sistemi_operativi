@@ -1,0 +1,10 @@
+Il programma c denominato
+lab07e01recursive.c
+riceve sulla riga di comando un valore intero n e, utilizzando
+la ricorsione (si veda la funzione binary), genera e visualizza
+tutti i numeri binari su n bit.
+
+Trasformare il programma da ricorsivo a concorrente, ovvero
+sostituire il procedimento ricorsivo con la generazione
+(mediante fork()) di un numero adeguato di processi in grado
+di visualizzare i numeri binari (in qualunque ordine).

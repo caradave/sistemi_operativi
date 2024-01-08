@@ -1,0 +1,6 @@
+Realizzare uno script bash che
+- riceva in ingresso (da riga di comando oppure da tastiera)
+  il nome di un direttorio
+- rinomini tutti i file e tutti i direttori in esso
+  contenuti, in modo che i nuovi nomi siano identici a quelli
+  originali ma siano composti da sole lettere minuscole.

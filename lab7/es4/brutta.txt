@@ -1,0 +1,58 @@
+# !/bin/bash
+
+clear
+
+if test $# -ne 1
+then
+    echo "inseiri il nome del file: "
+    read fileName
+else
+    fileName=$1
+fi
+
+textContent=$(cat $fileName)
+
+declare -a parole
+declare -a occorrenze
+check=0
+checkCheck=0
+newWorld=0
+
+for world in $textContent
+do
+    check=0
+    # se non ho ancora inserito nessuna parola inserisco una nuova parola, inserisco il counter legato alla parola 
+    # e aumento il counter di parole nuove trovate
+    if test $check -eq ${#parole[*]}
+    then
+        parole[$newWorld]=$word
+        occorrenze[$newWorld]=0
+        let newWord=$newWord+1
+    else
+        # se avevo già inserito parole controllo che non siano dei doppioni
+        for i in ${#parole[*]}
+        do
+            # se sono dei doppioni metto a 1 il check e aumento il counter associato a quella parola
+            if test $word -eq ${parole[$i]} 
+            then
+                check=1
+                let occorrenze[$i]=occorrenze[$i]+1
+            fi
+        done
+    fi
+
+    if test $check -eq $checkCheck
+    then
+        parole[$newWorld]=$word
+        occorrenze[$newWorld]=1
+        let newWord=$newWord+1
+    fi
+
+done
+
+for i in ${#parole[*]}
+do
+    echo "${parole[$i]}"
+done
+
+exit 0

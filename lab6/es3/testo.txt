@@ -1,0 +1,45 @@
+Modificare il programma precedente in modo che le n
+sequenze ordinate (lette da file) vengano "fuse" (merged)
+per generare un'unica sequenza ordinata.
+
+Piu' in dettaglio:
+1. ciascun thread legge e ordina i dati memorizzati in
+   un file (ma *non* ne effettua la scrittura sul file
+   di uscita)
+2. il main, una volta sganciati i thread, ne attende la
+   terminazione e a seguito della terminazione di uno
+   di essi effettua la "fusione" (merge) dei dati appena
+   ordinati con quelli "fusi" precedentemente
+4. una volta terminati tutti i thread e "fuse" tutte le
+   sequenze, il main si occupa di memorizzare l'elenco
+   completo dei dati ordinati su un (unico) file di
+   uscita.
+
+Tra i parametri di ingresso al programma, il terzo parametro
+indichi quindi il nome di un unico file di uscita.
+Per semplicita' (di allocazione delle strutture dati) e'
+possibile supporre che in tutti i file sia memorizzato
+lo stesso numero di valori e, eventualmente, che tale numero
+sia noto a priori.
+
+Suggerimenti
+------------
+
+Si utilizzi una matrice per la memorizzazione dei dati
+letti dai file di ingresso, dedicando una riga (o colonna)
+a ciascun file (oppure, in alternativa, un vettore di
+strutture con un campo vettoriale).
+Ogni thread manipoli esclusivamente la "propria" riga
+(o colonna) della matrice (o elemento del vettore)
+comune.
+Il main effettui la fusione delle sequenze ordinate a
+coppie:
+- alla terminazione del primo thread fondera' 0 (zero)
+  dati con n
+- alla terminazione del secondo thread fondera' n
+  vecchi dati con n nuovi dati
+- alla terminazione del terzo thread fondera' 2*n
+  vecchi dati con n nuovi dati
+- ...
+Il main utilizzi uno o piu' vettori di supporto
+per la fusione dei dati della matrice.

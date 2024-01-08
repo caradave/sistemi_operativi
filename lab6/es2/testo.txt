@@ -1,0 +1,60 @@
+Realizzare un programma concorrente con N thread in grado di
+ordinare dei file di ingresso, procedendo in parallelo sui
+diversi file, secondo le seguenti specifiche.
+
+Il programma (di nome pgrm) riceve 3 parametri sulla riga di
+comando
+pgrm n strA strB
+dove:
+- n e' un valore intero
+- strA e' una stringa che identifica il nome di n file di
+  ingresso, di nome
+  strA1.txt, strA2.txt, ..., strAn.txt
+- strB e' una stringa che identifica il nome di n file di
+  uscita, di nome
+  strB1.txt, strB2.txt, ..., strBn.txt
+
+I file di ingresso strA contengono:
+* sulla prima riga, il numero di interi memorizzati sulle
+  righe successive alla prima
+* sulle righe successive, tali interi.
+Il seguente e' un esempio corretto di file:
+
+5
+102
+99
+34
+234
+25
+
+Il programma, una volta generati gli n nomi dei due file di
+ingresso e di uscita, attiva n thread.
+Ciascun thread:
+- legge dal "proprio" file di ingresso il vettore di interi
+- ordina (con un algoritmo di ordinamento a scelta) tale
+  vettore in ordine numerico crescente
+- memorizza il risultato nel corrispondente file di uscita
+  ("personale").
+
+Si noti che il programma di fatto implementa il seguente
+grafo di precedenza:
+
+    Mi---------
+    /\        |  
+   /  \       |
+  R1    R2   ...
+  |     |
+  O1    O2   ...
+  |     |
+  W1    W2   ...
+   \  /
+    \/        |
+    Mf---------
+
+In cui:
+- Mi e Mf sono le operazioni iniziali e finali del main
+- I flussi Ri, Oi e Wi sono le esecuzioni dei vari thread,
+  ciascuno dei quali
+  - legge il proprio file di ingresso, Ri
+  - lo ordina, Oi
+  - lo memorizza sul file di uscita, Wi.

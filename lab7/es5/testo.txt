@@ -1,0 +1,25 @@
+Uno script bash riceve due parametri:
+* il nome di un processo
+* un intervallo di tempo.
+Esso deve verificare a intervalli di tempo pari a quello
+specificato se il processo indicato e' ancora presente nel
+sistema.
+Se il processo rimane nello stato Z per piu' di 5 verifiche
+successive, lo script lo deve terminare.
+
+Suggerimento
+------------
+
+Il comando
+ps -el
+fornisce un output simile al seguente
+
+UID  PID PPID F    CPU PRI NI RSS  S  ADDR    TTY TIME    CMD
+  0   1  0    4000 0   31  0   568 Ss 6fd9cd4 ??  0:00.20 /sbin/launchd
+  0  10  1    4000 0   31  0  1292 R+ 6fd9384 ??  0:00.59 /usr/libexec/kextd
+  0  11  1    4000 0   31  0  3412 Z  6fd982c ??  0:02.10 /bin/ls
+
+Opportunamente parsificato esso fornisce le informazioni necessarie
+per risolvere il problema indicato.
+Si noti che il carattere 'Z' nella colonna denominata S indica che il
+processo e' uno zombie.
