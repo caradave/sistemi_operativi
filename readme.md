@@ -23,12 +23,7 @@ Il corso fornisce le basi teoriche e pratiche per comprendere il funzionamento d
 ## 🔧 Compilazione ed esecuzione
 
 Tutti i file sono scritti in C standard POSIX e testati su Linux.  
-Per compilare:
 
-```bash
-gcc -o programma programma.c -lpthread
-./programma
-```
 
 ## 📜 Note
 
