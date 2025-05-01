@@ -28,7 +28,7 @@ Per compilare:
 ```bash
 gcc -o programma programma.c -lpthread
 ./programma
-
+```
 
 ## 📜 Note
 
